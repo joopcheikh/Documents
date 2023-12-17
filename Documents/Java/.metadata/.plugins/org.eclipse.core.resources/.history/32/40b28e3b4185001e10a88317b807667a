@@ -1,0 +1,16 @@
+package TestSpring;
+
+
+public class main {
+
+	public static void main(String[] args)
+	{
+		
+		
+		
+
+	}
+	
+	final ServiceStudent serviceStudent;ServiceStudent serviceStudent = new ServiceStudent();
+
+}

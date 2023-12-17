@@ -1,0 +1,60 @@
+package service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import entity.Role;
+import entity.User;
+import repository.RoleRepository;
+import repository.UserRepository;
+
+@Service
+@Transactional
+public class ServiceAccountImpls implements ServiceAccount
+{
+	private UserRepository userRepository;
+	private RoleRepository roleRepository;
+	
+	public ServiceAccountImpls(UserRepository userRepository, RoleRepository roleRepository) {
+		this.userRepository = userRepository;
+		this.roleRepository =  roleRepository;
+	}
+
+	@Override
+	public User addNewUserToDatabase(User user) {
+		// TODO Auto-generated method stub
+		return userRepository.save(user);
+	}
+
+	@Override
+	public Role addNewRoleToDatabase(Role role) {
+		// TODO Auto-generated method stub
+		return roleRepository.save(role);
+	}
+
+	@Override
+	public void addRoleToUser(String username, String roleName) {
+		// récupérer le user
+		User user = userRepository.findUserByUsename(username);
+		// récupérer le role
+		Role role = roleRepository.findRoleByRoleName(roleName);
+		
+		// Ajouter le role au user
+		user.getRole().add(role);
+	}
+
+	@Override
+	public User loadUserFomDatabase(String username) {
+		// TODO Auto-generated method stub
+		return userRepository.findUserByUsename(username);
+	}
+
+	@Override
+	public List<User> listUsers() {
+		// TODO Auto-generated method stub
+		return userRepository.findAll();
+	}
+
+}

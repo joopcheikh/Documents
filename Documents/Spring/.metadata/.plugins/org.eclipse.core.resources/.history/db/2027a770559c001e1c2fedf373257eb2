@@ -1,0 +1,93 @@
+package Config;
+
+import java.security.Key;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+
+@Service
+public class JwtService
+{
+	private static final String SECRET_KEY = "byovDLFXfpToQcLJdKESoxOW016NcFwS";
+
+	public String extractUsername(String token) {
+		// TODO Auto-generated method stub
+		return extractClaim(token, Claims::getSubject);
+	}
+	// extraction d'un claim
+	public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
+		final Claims claims = extractAllClaims(token);
+		return claimsResolver.apply(claims);
+	}
+	
+	// méthode pour générer un token
+	public String generateToken(
+			Map<String, Object> extraClaims,
+			UserDetails userDetails
+	) {
+		return Jwts
+				.builder()
+				.setClaims(extraClaims) 
+				.setSubject(userDetails.getUsername())
+				.setIssuedAt(new Date(System.currentTimeMillis()))
+				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+				.signWith(getSignIngKey(), SignatureAlgorithm.HS256)
+				.compact();
+	}
+	
+	// Another choice to generate the token without using extraClaims ...
+	public String generateToken(UserDetails userDetails) {
+		return generateToken(new HashMap<>(), userDetails);
+	}
+	
+	
+	
+	
+	
+	
+	// extraction de tous les claims
+	// définir les revendications spécifique k n voulons inclure dans le jeton générer lorsqu'un user est authentifié avec succès
+	Claims extractAllClaims(String token) {
+		return Jwts
+				.parserBuilder() // Permet de créer un perseur jwt (composant qui permet de décoder et vérifier les token)
+				.setSigningKey(getSignIngKey()) // est utiliser pour spécifier la clé secrete utilisée lors de la vérification de la signature d'un jeton jwt
+				.build() // permet de finaliser la construction du parseur Jwt
+				.parseClaimsJws(token) // utiliser pour analyser un JWT avec une signature
+				.getBody(); // utiliser pour récupérer les revendications d'un JWT après la constructioréussie, permettant ainsi d'accéder aux informations qpécifiques contenus dans le token
+				
+	}
+	// implémentation de la méthode getSignInKet()
+	private Key getSignIngKey() {
+		byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+		
+		return Keys.hmacShaKeyFor(keyBytes); // Algorithmen d'hmac
+	}
+	
+	// détermine si les infos du user son expirées
+	private Date extractExpiration(String token) {
+		return extractClaim(token, Claims::getExpiration);
+	}
+	
+	// détermine si le token est expiré
+	private boolean isTokenExpired(String token) {
+		return extractExpiration(token).before(new Date());
+	}
+	
+	// méthode pour vérifier la validité du token
+	public boolean isTokenValid(String token, UserDetails userDetails) {
+		final String username = extractUsername(token);
+			
+		return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+	}
+
+}

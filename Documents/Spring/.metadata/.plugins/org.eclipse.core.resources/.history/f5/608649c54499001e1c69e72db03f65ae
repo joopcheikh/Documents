@@ -1,0 +1,19 @@
+package entity;
+
+import java.util.Collection;
+
+import jakarta.persistence.ManyToMany;
+
+public class User
+{
+	private Integer id;
+	
+	private String username;
+	
+	private String password;
+	
+	@ManyToMany
+	private Collection<Role> role;
+	
+	
+}

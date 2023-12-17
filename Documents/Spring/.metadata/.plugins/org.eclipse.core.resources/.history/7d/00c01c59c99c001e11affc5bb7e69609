@@ -1,0 +1,30 @@
+package service;
+
+import java.security.Key;
+
+import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Build;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+
+public class TestJwtService {
+	
+	static String SECRET_KEY = "73HDN367SDV3FYD73E";
+	// méthodes qui permert de définir dans notre jeton
+	public Claims allClaim(String token) {
+		return Jwts
+				.parserBuilder() // permet de créer un parseur de jeton Jwt
+				.setSigningKey(getSigningKey()) // permet de spécifier la clé secrete utilisée
+				.build() // permet de finir la construction du parseur
+				.parseClaimsJws(token) // permet d'analyser la signature du token jwt
+				.getBody(); // avoir les claims avoir construction
+	}
+	
+	// construction de la clé de cryptage
+	private Key getSigningKey() {
+		byte[] byteVariable = Decoders.BASE64.decode(SECRET_KEY);
+		return Keys.hmacShaKeyFor(byteVariable);
+	}
+}

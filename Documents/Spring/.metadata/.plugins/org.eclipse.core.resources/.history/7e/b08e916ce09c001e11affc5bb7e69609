@@ -1,0 +1,45 @@
+package service;
+
+import java.security.Key;
+import java.util.Date;
+import java.util.function.Function;
+
+import org.springframework.boot.autoconfigure.info.ProjectInfoProperties.Build;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+
+public class TestJwtService {
+	
+	static String SECRET_KEY = "73HDN367SDV3FYD73E";
+	// méthodes qui permet de définir les revendication(infors) d'un user dans le token lorsqu'il s'est authentifié avec succès
+	public Claims extractAllClaims(String token) {
+		return Jwts
+				.parserBuilder()
+				.setSigningKey(getSigningKey())
+				.build()
+				.parseClaimsJws(token)
+				.getBody();
+	}
+	
+	// construction de la clé de cryptage
+	public Key getSigningKey() {
+		byte[] byteKey = Decoders.BASE64.decode(SECRET_KEY);
+		return Keys.hmacShaKeyFor(byteKey);
+	}
+	
+	// méthode qui permet d'extraire une revendication spécifique d'un jeton
+	public <T> T extractClaim(String token, Function<Claims, T> claimRecoder) {
+		final Claims claims = extractAllClaims(token);
+		return claimRecoder.apply(claims);
+	}
+	
+	// méthode qui nous permet d'extraire le username
+	
+	
+	// détermine si les infos du user sont expirées ou pas
+	
+	
+}

@@ -1,0 +1,10 @@
+package service;
+
+public interface ServiceAccount
+{
+	// Ajouter un  new user à la BD
+	// Ajouter un new role à la BD
+	// Ajouter un un role à un user
+	// charger un user à partir de la DB
+	// Retourner tous les users
+}

@@ -1,0 +1,5 @@
+package Mouh.younoussJWT.securityJwt;
+
+public class SecurityConfig {
+
+}

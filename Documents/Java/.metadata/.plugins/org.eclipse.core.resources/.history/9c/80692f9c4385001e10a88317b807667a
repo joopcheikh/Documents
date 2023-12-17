@@ -1,0 +1,18 @@
+package TestSpring;
+
+
+public class Main {
+	
+	 private final StudentServiceLayer studentServiceLayer;
+
+ 
+    public Main(StudentServiceLayer studentServiceLayer) {
+        this.studentServiceLayer = studentServiceLayer;
+    }
+
+   
+    public List<Student> getStudents(){
+        return studentServiceLayer.getStudents();
+    }
+	
+}

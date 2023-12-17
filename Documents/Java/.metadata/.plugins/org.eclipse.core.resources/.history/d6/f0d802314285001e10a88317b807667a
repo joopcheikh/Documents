@@ -1,0 +1,9 @@
+package TestSpring;
+
+
+public class Main {
+
+	
+	private ServiceStudent serviceStudent;
+	
+}

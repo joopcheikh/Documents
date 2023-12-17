@@ -1,0 +1,30 @@
+package testSpringJwt.testJwt;
+
+import java.util.ArrayList;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import entity.User;
+import service.ServiceAccount;
+
+@SpringBootApplication
+public class TestJwtApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(TestJwtApplication.class, args);
+	}
+	
+	CommandLineRunner start(ServiceAccount serviceAccount)
+	{
+		return args ->{
+			
+			serviceAccount.addNewUserToDatabase(new User(null,"cheikh","668600", new ArrayList<>()));
+			serviceAccount.addNewRoleToDatabase(new User(null, "ndao","kan_ndao", new ArrayList<>()));
+			
+		};
+		
+	}
+
+}

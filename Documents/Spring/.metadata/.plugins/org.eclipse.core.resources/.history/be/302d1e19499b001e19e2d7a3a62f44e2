@@ -1,0 +1,98 @@
+package entity;
+
+import java.util.Collection;
+import java.util.List;
+
+import javax.management.relation.Role;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Builder // contruction de l'objet de maniere simple
+@AllArgsConstructor
+@NoArgsConstructor
+@Data // permet de générer getters et setters
+@Entity
+@Table
+public class User implements UserDetails
+{
+	@Id
+	@GeneratedValue
+	private Integer id;
+	
+	private String firstname;
+	
+	private String lastname;
+	
+	private String email;
+	
+	private String password;
+	
+	
+	@Enumerated(EnumType.STRING)
+	private Role role;
+	
+	// should return a liste of roles
+	/* GrantedAuthority est une interface qui représente une autorité ou un privilège accorder
+	 * à une entity
+	*/
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		/*
+		 * SimpleGrantedAuthority: utiléser pour représenter de manière simple 
+		 * une autorité ou un role attribué à un user
+		 */
+		return List.of(new SimpleGrantedAuthority(role.getRoleName()));
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	@Override
+	public String getUsername() {
+		// Pour nous le username, c'est l'email
+		return email;
+	}
+	
+	// Permet de déterminer si le compte de l'utilisateur est expirer ou non
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+	
+	// Permet de déterminer si le compte de l'utilisateur associé est vérouiller ou pas
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+	
+	/*
+	 * Permet de déterminer si les informations d'identification(parexemple le password)
+	 * de l'utilisateur associé sont expirés ou non
+	 */
+	@Override
+	public boolean isCredentialsNonExpired() {
+		
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+}

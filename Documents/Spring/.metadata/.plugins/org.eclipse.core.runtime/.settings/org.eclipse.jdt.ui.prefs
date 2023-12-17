@@ -1,0 +1,11 @@
+breadcrumb.org.eclipse.debug.ui.DebugPerspective=true
+content_assist_lru_history=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><history maxLHS\="100" maxRHS\="10"><lhs name\="java.lang.Enum"><rhs name\="jakarta.persistence.EnumType"/><rhs name\="org.springframework.security.config.http.SessionCreationPolicy"/><rhs name\="io.jsonwebtoken.SignatureAlgorithm"/></lhs><lhs name\="java.lang.constant.Constable"><rhs name\="jakarta.persistence.EnumType"/><rhs name\="org.springframework.security.config.http.SessionCreationPolicy"/><rhs name\="io.jsonwebtoken.SignatureAlgorithm"/></lhs><lhs name\="java.util.Collection"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="java.lang.Iterable"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="java.util.List"><rhs name\="java.util.ArrayList"/></lhs><lhs name\="entity.AppUser"><rhs name\="entity.AppUser"/></lhs><lhs name\="entity.AppRole"><rhs name\="entity.AppRole"/></lhs><lhs name\="entity.User"><rhs name\="entity.User"/></lhs><lhs name\="entity.Role"><rhs name\="entity.Role"/></lhs><lhs name\="java.lang.Cloneable"><rhs name\="java.util.Date"/></lhs><lhs name\="java.util.Date"><rhs name\="java.util.Date"/></lhs><lhs name\="java.util.Map"><rhs name\="java.util.HashMap"/></lhs></history>
+content_assist_number_of_computers=15
+eclipse.preferences.version=1
+org.eclipse.jdt.internal.ui.navigator.layout=2
+org.eclipse.jdt.internal.ui.navigator.librariesnode=true
+org.eclipse.jdt.ui.formatterprofiles.version=23
+spelling_locale_initialized=true
+typefilter_migrated_2=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

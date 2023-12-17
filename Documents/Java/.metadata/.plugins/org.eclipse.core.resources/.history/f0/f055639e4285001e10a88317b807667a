@@ -1,0 +1,12 @@
+package TestSpring;
+
+
+public class Main {
+
+	
+	private ServiceStudent serviceStudent;
+	
+	public Main(ServiceStudent serviceStudent) {
+		this.serviceStudent = ServiceStudent;
+	}
+}

@@ -1,0 +1,17 @@
+package TestSpring;
+
+import java.time.LocalDate;
+
+public class Student
+{
+	private String firstName;
+	private String lastName;
+	private LocalDate dateOfBirth;
+	
+	public Student() {}
+	public Student(String firstName, String lastName, LocalDate dateOfBirth) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.LocalDate = LocalDate;
+	}
+}

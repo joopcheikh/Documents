@@ -1,0 +1,14 @@
+package entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+
+@Entity
+@Table
+public class Role
+{
+	private Integer id;
+	
+	private String roleName;
+}

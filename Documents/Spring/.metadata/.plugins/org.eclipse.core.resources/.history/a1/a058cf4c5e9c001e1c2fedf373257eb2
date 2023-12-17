@@ -1,0 +1,25 @@
+package service;
+
+import java.io.IOException;
+
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+public class TestJwtAuthenticationFilter extends OncePerRequestFilter{
+
+	// permet d'éffectuer des op tq la vérification des infos d'identification, l'autorisation
+	@Override
+	protected void doFilterInternal(
+			HttpServletRequest request, // représente la requete reçu du client 
+			HttpServletResponse response, // réponse http que le servlet envoie au client
+			FilterChain filterChain) //
+			throws ServletException, IOException {
+		
+		
+	}
+
+}
